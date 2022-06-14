@@ -52,7 +52,7 @@
 		data() {
 			return {
 				// 控制是否是登录页面,默认为false
-				rlogin: false
+				rlogin: true
 			}
 		},
 		components: {

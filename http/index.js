@@ -4,7 +4,7 @@ import axios from "axios";
 import serverConfig from "./config/index";
 // import qs from "qs";
 
-
+axios.defaults.withCredentials = true// 允许跨域设置，不然可能因为拿不到cookie而报错
 // 创建 axios 请求实例
 const serviceAxios = axios.create({
   baseURL: serverConfig.baseURL, // 基础请求地址
