@@ -2,14 +2,14 @@
 import serviceAxios from "../index";
 
 
-export const getLoginInfo = (liginInfo) => {
-	console.log('登录的信息')
-	console.log(liginInfo)
+export const getLoginInfo = (loginInfo) => {
     return serviceAxios({
         url: "/login/cellphone",
         method: "get",
         params: {
-        
+			phone:loginInfo.phone,
+			password:loginInfo.password
+			
         },
     });
 };

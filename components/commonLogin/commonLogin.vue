@@ -147,13 +147,13 @@
 						return;
 					}
 				}
+				let data = {phone:this.account,password:this.password,sex:this.sex}
 				console.log(this.account)
-				getLoginInfo().then((response)=>{
+				getLoginInfo(data).then((response)=>{
 					console.log("请求成功返回的数据")
 					console.log(response)
 					
 				})
-				this.$emit("doLogin",{account:this.account,password:this.password,sex:this.sex});
 			},
 			// 暂不登录
 			// doLoginDelay(){
