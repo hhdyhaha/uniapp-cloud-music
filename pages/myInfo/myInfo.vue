@@ -5,7 +5,7 @@
 			<commonLogin></commonLogin>
 		</view>
 		<!-- 我的页面 -->
-		<view >
+		<view v-else>
 			<!-- 个人信息卡片 -->
 			<uni-section  type="line">
 				<uni-card >
