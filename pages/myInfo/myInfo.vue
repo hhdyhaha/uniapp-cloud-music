@@ -47,6 +47,8 @@
 <script>
 	// 引入登录页面
 	import CommonLogin from "@/components/commonLogin/commonLogin.vue"
+	// 引入axios请求
+	import {getMyInfo} from "@/http/api/myInfo.js"
 
 	export default {
 		data() {
@@ -62,7 +64,6 @@
 		// 监听页面显示。页面每次出现在屏幕上都触发，包括从下级页面点返回露出当前页面
 		onLoad: function() {
 			console.log('App Launch');
-			// #ifdef APP-PLUS
 			// token标志来判断
 			let token = uni.getStorageSync('token');
 			// 如果token存在显示我的信息,否则显示登录页面
@@ -71,6 +72,12 @@
 			}else{
 				this.rlogin = true
 			}
+			console.log('发送请求获取状态数据1')
+			
+			getMyInfo().then((response) => {
+				console.log('发送请求获取状态数据')
+				console.log(response)
+			})
 		}
 	}
 </script>
