@@ -186,18 +186,45 @@ export default {
           const element = playlist[index];
           // 歌单id
           let listId = element.id;
+          // 看数组中是否存在相同属性的对象
+          let myEnjoyExit = this.eleExit(this.myEnjoy, listId);
+          let createdPlaylistExit = this.eleExit(this.createdPlaylist, listId);
+          let subPlaylistPlaylistExit = this.eleExit(this.subPlaylist, listId);
           // 通过用户id判断歌单是否为创建歌单
           if (this.userId === element.userId) {
-            // 如果是创建歌单,添加到创建歌单列表
-            index === 0? this.myEnjoy.push(element): this.createdPlaylist.push(element);
+            // 如果存在什么也不做,如果不存在就添加,添加的时候进行判断是我喜欢的歌单还是我创建的歌单
+            if (myEnjoyExit) {
+            } else if (index === 0) {
+              this.myEnjoy.push(element);
+            } else if (createdPlaylistExit) {
+            } else {
+              this.createdPlaylist.push(element);
+            }
+            console.log("查看是否存在");
+            console.log(myEnjoyExit);
+          } else if (subPlaylistPlaylistExit) {
           } else {
             // 否则,添加收藏歌单列表
             this.subPlaylist.push(element);
           }
         }
-        // console.log(this.myEnjoy);
+        console.log(this.myEnjoy);
+        console.log(this.createdPlaylist);
+        console.log(this.subPlaylist);
       });
     }
+  },
+  methods: {
+    // 判断元素是否存在 (数组,歌单id)
+    eleExit: function (arr, listId) {
+      let result = arr.some((item) => {
+        // 判断数组中是否存在歌单id
+        if (item.id == listId) {
+          return true;
+        }
+      });
+      return result;
+    },
   },
 };
 </script>
