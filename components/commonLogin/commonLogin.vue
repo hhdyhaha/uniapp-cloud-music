@@ -162,29 +162,7 @@
 				console.log(this.account)
 				getLoginInfo(data).then((response) => {
 					// 将 data 存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个同步接口。
-					try {
-						uni.setStorageSync('token', response.data.token);
-						let token = uni.getStorageSync('token');
-						if (token) {			
-							//存在则关闭启动页进入首页
-							plus.navigator.closeSplashscreen();
-						} else {
-							//不存在则跳转至登录页
-							uni.reLaunch({
-								url: "/pages/login/login",
-								success: () => {
-									// 关闭启动页面
-									plus.navigator.closeSplashscreen();
-								}
-							})
-						}
-						// #endif
-					} catch (e) {
-						// error
-					}
-				}).catch((error) => {
-					console.log("请求失败返回的数据")
-					console.log(error)
+					uni.setStorageSync('token', response.data.token);
 				})
 			},
 			// 暂不登录

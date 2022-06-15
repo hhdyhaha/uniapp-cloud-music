@@ -59,29 +59,18 @@
 			// 登录页面
 			CommonLogin
 		},
-		onLaunch: function() {
+		// 监听页面显示。页面每次出现在屏幕上都触发，包括从下级页面点返回露出当前页面
+		onLoad: function() {
 			console.log('App Launch');
 			// #ifdef APP-PLUS
 			// token标志来判断
 			let token = uni.getStorageSync('token');
-			console.log('获取到的数据缓存中的token')
-			console.log(token)
-			let _this = this
-			if (token) {
-				//不存在则跳转至登录页
-				uni.reLaunch({
-					url: "/pages/login/login",
-					success: () => {
-						_this.$store.commit("login/loginState", _this.rlogin)
-						plus.navigator.closeSplashscreen();
-					}
-				})
-			} else {
+			// 如果token存在显示我的信息,否则显示登录页面
+			if(token){
 				this.rlogin = false
-				//存在则关闭启动页进入首页
-				plus.navigator.closeSplashscreen();
+			}else{
+				this.rlogin = true
 			}
-			// #endif
 		}
 	}
 </script>
