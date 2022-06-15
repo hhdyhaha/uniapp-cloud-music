@@ -1,5 +1,6 @@
 import App from './App'
-
+//引入store
+import store from './store'
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false

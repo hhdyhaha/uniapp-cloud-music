@@ -20,7 +20,8 @@
 
 			<view v-if="loginInfo && loginInfo.length>0">
 				<view class="size_m_s tc999" @click="()=>{showLoginInfo = !showLoginInfo}">
-					{{showLoginInfo ? '常用账号列表':'选择常用账号'}}</view>
+					{{showLoginInfo ? '常用账号列表':'选择常用账号'}}
+				</view>
 				<view v-if="showLoginInfo">
 					<view class="size_m_s margin_bottom_10 tc333" v-for="(item,index) in loginInfo" v-bind:key="index"
 						@click="doSelectLoginInfo(item)">
@@ -160,16 +161,30 @@
 				}
 				console.log(this.account)
 				getLoginInfo(data).then((response) => {
-					console.log("请求成功返回的数据")
-					console.log(response)
-					console.log("请求成功返回的cookie")
-					console.log(response.data.cookie)
-					// 设置cookie
-					//登录成功之后缓存res的头部信息的 'Set-Cookie'
-					uni.setStorageSync("cookie", response.data.cookie)
-					console.log("请求成功返回的token")
-					console.log(response.data.token)
-
+					// 将 data 存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个同步接口。
+					try {
+						uni.setStorageSync('token', response.data.token);
+						let token = uni.getStorageSync('token');
+						if (token) {			
+							//存在则关闭启动页进入首页
+							plus.navigator.closeSplashscreen();
+						} else {
+							//不存在则跳转至登录页
+							uni.reLaunch({
+								url: "/pages/login/login",
+								success: () => {
+									// 关闭启动页面
+									plus.navigator.closeSplashscreen();
+								}
+							})
+						}
+						// #endif
+					} catch (e) {
+						// error
+					}
+				}).catch((error) => {
+					console.log("请求失败返回的数据")
+					console.log(error)
 				})
 			},
 			// 暂不登录
