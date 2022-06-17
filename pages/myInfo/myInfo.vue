@@ -50,28 +50,26 @@
       <!-- 我喜欢的音乐卡片 -->
       <uni-section type="line">
         <uni-card title="我喜欢的音乐">
-          <p>我喜欢的音乐</p>
+		<view class="myEnjoyBox" v-for="item in myEnjoy" :key="item.id">
+			<image
+			style="width: 40rpx;height: 40rpx;"
+			  :src="item.coverImgUrl"
+			></image>
+			<p>{{item.name}}</p>
+		</view>
+          
         </uni-card>
       </uni-section>
       <!-- 创建歌单卡片 -->
       <uni-section type="line">
         <uni-card :title="createdPlaylistCount">
-          <view>
-
-            <uni-col
-              class="account"
-              :span="12"
-              :offset="6"
-            >
-              <view>
-                <ul>
-                  <li>2019年度歌单</li>
-                  <li>2020年度歌单</li>
-                  <li>2021年度歌单</li>
-                </ul>
-              </view>
-            </uni-col>
-          </view>
+          <view class="myEnjoyBox" v-for="item in myEnjoy" :key="item.id">
+			<image
+			style="width: 40rpx;height: 40rpx;"
+			  :src="item.coverImgUrl"
+			></image>
+			<p>{{item.name}}</p>
+		</view>
 
         </uni-card>
       </uni-section>
@@ -200,8 +198,6 @@ export default {
             } else {
               this.createdPlaylist.push(element);
             }
-            console.log("查看是否存在");
-            console.log(myEnjoyExit);
           } else if (subPlaylistPlaylistExit) {
           } else {
             // 否则,添加收藏歌单列表
@@ -265,5 +261,18 @@ export default {
   text-align: center;
   margin-bottom: 10rpx;
   font-size: 10px;
+}
+.myEnjoyBox{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	p{
+		margin-left: 10rpx;
+	}
+	image{
+		border-radius: 60rpx;
+	}
+	
 }
 </style>
