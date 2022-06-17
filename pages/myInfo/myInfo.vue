@@ -50,47 +50,51 @@
       <!-- 我喜欢的音乐卡片 -->
       <uni-section type="line">
         <uni-card title="我喜欢的音乐">
-		<view class="myEnjoyBox" v-for="item in myEnjoy" :key="item.id">
-			<image
-			style="width: 40rpx;height: 40rpx;"
-			  :src="item.coverImgUrl"
-			></image>
-			<p>{{item.name}}</p>
-		</view>
-          
+          <view
+            class="myEnjoyBox"
+            v-for="item in myEnjoy"
+            :key="item.id"
+          >
+            <image
+              style="width: 40rpx;height: 40rpx;"
+              :src="item.coverImgUrl"
+            ></image>
+            <p>{{item.name}}</p>
+          </view>
+
         </uni-card>
       </uni-section>
       <!-- 创建歌单卡片 -->
       <uni-section type="line">
         <uni-card :title="createdPlaylistCount">
-          <view class="myEnjoyBox" v-for="item in myEnjoy" :key="item.id">
-			<image
-			style="width: 40rpx;height: 40rpx;"
-			  :src="item.coverImgUrl"
-			></image>
-			<p>{{item.name}}</p>
-		</view>
+          <view
+            class="myEnjoyBox"
+            v-for="item in createdPlaylist"
+            :key="item.id"
+          >
+            <image
+              style="width: 40rpx;height: 40rpx;"
+              :src="item.coverImgUrl"
+            ></image>
+            <p>{{item.name}}</p>
+          </view>
 
         </uni-card>
       </uni-section>
       <!-- 收藏歌单卡片 -->
       <uni-section type="line">
         <uni-card :title="subPlaylistCount">
-          <view>
-
-            <uni-col
-              class="account"
-              :span="12"
-              :offset="6"
-            >
-              <view>
-                <ul>
-                  <li>收藏年度歌单</li>
-                  <li>收藏2020年度歌单</li>
-                  <li>收藏2021年度歌单</li>
-                </ul>
-              </view>
-            </uni-col>
+         <view
+            class="myEnjoyBox"
+            v-for="item in subPlaylist"
+            :key="item.id"
+            @click="enterPlayListsDetail(item)"
+          >
+            <image
+              style="width: 40rpx;height: 40rpx;"
+              :src="item.coverImgUrl"
+            ></image>
+            <p >{{item.name}}</p>
           </view>
 
         </uni-card>
@@ -204,9 +208,6 @@ export default {
             this.subPlaylist.push(element);
           }
         }
-        console.log(this.myEnjoy);
-        console.log(this.createdPlaylist);
-        console.log(this.subPlaylist);
       });
     }
   },
@@ -221,6 +222,19 @@ export default {
       });
       return result;
     },
+    // 获取歌单详情
+    enterPlayListsDetail(item){
+      let playListId = item.id
+      getPlayListsDetail(playListId).then((response)=>{
+      // console.log('歌单所有歌曲');
+      // console.log(response);
+	  // 所有歌曲名称
+	  let songs = response.data.songs
+	  uni.navigateTo({
+	  	url:"/pages/playListSongs/palyListSongs?songs=" + encodeURIComponent(JSON.stringify(songs))
+	  })
+      })
+    }
   },
 };
 </script>
@@ -262,17 +276,18 @@ export default {
   margin-bottom: 10rpx;
   font-size: 10px;
 }
-.myEnjoyBox{
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
-	p{
-		margin-left: 10rpx;
-	}
-	image{
-		border-radius: 60rpx;
-	}
-	
+.myEnjoyBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  p {
+    margin-top: 20rpx;
+    margin-left: 10rpx;
+  }
+  image {
+    margin-top: 20rpx;
+    border-radius: 60rpx;
+  }
 }
 </style>

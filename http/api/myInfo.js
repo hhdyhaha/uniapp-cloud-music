@@ -27,15 +27,15 @@ export const getPlayLists = (uid) => {
     });
 };
 
-// 获取歌单详情
-export const getPlayListsDetail = (uid) => {
-	console.log('传过来的uid')
-	console.log(uid)
+// 获取歌单所有歌曲
+export const getPlayListsDetail = (id) => {
+	console.log('传过来的歌单id')
+	console.log(id)
     return serviceAxios({
-        url: "/playlist/detail",
+        url: "/playlist/track/all",
         method: "get",
 		params:{
-			uid:uid
+			id:id
 		}
     });
 };
