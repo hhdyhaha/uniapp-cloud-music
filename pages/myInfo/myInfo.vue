@@ -84,7 +84,7 @@
       <!-- 收藏歌单卡片 -->
       <uni-section type="line">
         <uni-card :title="subPlaylistCount">
-         <view
+          <view
             class="myEnjoyBox"
             v-for="item in subPlaylist"
             :key="item.id"
@@ -94,7 +94,7 @@
               style="width: 40rpx;height: 40rpx;"
               :src="item.coverImgUrl"
             ></image>
-            <p >{{item.name}}</p>
+            <p>{{item.name}}</p>
           </view>
 
         </uni-card>
@@ -223,18 +223,20 @@ export default {
       return result;
     },
     // 获取歌单详情
-    enterPlayListsDetail(item){
-      let playListId = item.id
-      getPlayListsDetail(playListId).then((response)=>{
-      // console.log('歌单所有歌曲');
-      // console.log(response);
-	  // 所有歌曲名称
-	  let songs = response.data.songs
-	  uni.navigateTo({
-	  	url:"/pages/playListSongs/palyListSongs?songs=" + encodeURIComponent(JSON.stringify(songs))
-	  })
-      })
-    }
+    enterPlayListsDetail(item) {
+      let playListId = item.id;
+      getPlayListsDetail(playListId).then((response) => {
+        // console.log('歌单所有歌曲');
+        // console.log(response);
+        // 所有歌曲名称
+        let songs = response.data.songs;
+        uni.navigateTo({
+          url:
+            "/pages/playListSongs/palyListSongs?songs=" +
+            encodeURIComponent(JSON.stringify(songs)),
+        });
+      });
+    },
   },
 };
 </script>
