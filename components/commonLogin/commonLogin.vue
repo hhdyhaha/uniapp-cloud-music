@@ -163,6 +163,9 @@
 				getLoginInfo(data).then((response) => {
 					// 将 data 存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个同步接口。
 					uni.setStorageSync('token', response.data.token);
+					uni.redirectTo({
+						url: '/pages/myInfo/myInfo'
+					})
 				})
 			},
 			// 暂不登录

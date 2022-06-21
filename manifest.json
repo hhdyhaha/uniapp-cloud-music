@@ -43,7 +43,9 @@
             /* ios打包配置 */
             "ios" : {},
             /* SDK配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "ad" : {}
+            }
         }
     },
     /* 快应用特有相关 */
@@ -73,7 +75,7 @@
         "devServer" : {
             "proxy" : {
                 "/api" : {
-                    "target" : "http://localhost:3000",
+                    "target" : "http://82.157.66.34:3000",
                     "changeOrigin" : true,
                     "pathRewrite" : {
                         "^/api" : ""

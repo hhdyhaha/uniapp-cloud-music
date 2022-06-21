@@ -35,8 +35,7 @@ export const getPlayListsDetail = (id) => {
         url: "/playlist/track/all",
         method: "get",
 		params:{
-			id:id,
-			limit:30
+			id:id
 		}
     });
 };

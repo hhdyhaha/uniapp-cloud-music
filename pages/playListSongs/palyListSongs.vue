@@ -29,7 +29,7 @@
 		data() {
 			return {
 				// 歌单详情
-				songs: uni.getStorageSync("songs") || [],
+				songs: [],
 				// 歌曲url
 				songUrl: "",
 				title: "",
@@ -41,7 +41,7 @@
 		},
 		onLoad: function(options) {
 			let songs = JSON.parse(decodeURIComponent(options.songs));
-			uni.setStorageSync("songs", songs);
+			this.songs = songs
 			this.$zaudio.updateAudio(songs)
 		},
 		methods: {

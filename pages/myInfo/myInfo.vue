@@ -1,15 +1,15 @@
 <template>
   <view class="">
-    <view
+    <!-- <view
       class="login"
       v-if="rlogin"
-    >
+    > -->
       <!-- 登录 -->
-      <commonLogin></commonLogin>
-    </view>
+      <!-- <commonLogin></commonLogin> -->
+    <!-- </view> -->
     <!-- 我的页面 -->
 
-    <view v-else>
+    <view>
       <view class="header">
         <!-- 头像 -->
         <view class="avatar">
@@ -54,6 +54,7 @@
             class="myEnjoyBox"
             v-for="item in myEnjoy"
             :key="item.id"
+			 @click="enterPlayListsDetail(item)"
           >
             <image
               style="width: 40rpx;height: 40rpx;"
@@ -71,6 +72,7 @@
             class="myEnjoyBox"
             v-for="item in createdPlaylist"
             :key="item.id"
+			 @click="enterPlayListsDetail(item)"
           >
             <image
               style="width: 40rpx;height: 40rpx;"
@@ -146,29 +148,19 @@ export default {
     // 登录页面
     CommonLogin,
   },
-  // 监听页面加载，其参数为上个页面传递的数据
-
-  onLoad: function () {
-    // token标志来判断
-    let token = uni.getStorageSync("token");
-    // 如果token存在显示我的信息,否则显示登录页面
-    if (token) {
-      this.rlogin = false;
-    } else {
-      this.rlogin = true;
-    }
-    // 账户信息
-    getMyInfo().then((response) => {
-      let userState = response.data.data.profile;
-      this.avatarUrl = userState.avatarUrl;
-      this.nickName = userState.nickname;
-      this.signature = userState.signature;
-      this.backgroundUrl = userState.backgroundUrl;
-      this.userId = userState.userId;
-    });
-  },
   // 监听页面显示。页面每次出现在屏幕上都触发，包括从下级页面点返回露出当前页面
   onShow() {
+	  // 账户信息
+	  getMyInfo().then((response) => {
+	    let userState = response.data.data.profile;
+	    this.avatarUrl = userState.avatarUrl;
+	    this.nickName = userState.nickname;
+	    this.signature = userState.signature;
+	    this.backgroundUrl = userState.backgroundUrl;
+	    this.userId = userState.userId;
+	  });
+	  
+	  
     // 歌单数量
     getPlaylistCount().then((response) => {
       let playLists = response.data;
