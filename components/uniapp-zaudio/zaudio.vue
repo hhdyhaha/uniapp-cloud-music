@@ -109,7 +109,7 @@ export default {
 	props: {
 		theme: {
 			type: String, // 主题 'theme1' or 'theme2'
-			default: 'theme1'
+			default: 'theme3'
 		},
 		themeColor: {
 			type: String,
