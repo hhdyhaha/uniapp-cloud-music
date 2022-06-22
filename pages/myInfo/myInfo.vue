@@ -149,9 +149,9 @@ export default {
     CommonLogin,
   },
   // 监听页面显示。页面每次出现在屏幕上都触发，包括从下级页面点返回露出当前页面
-  onShow() {
+  async onLoad() {
 	  // 账户信息
-	  getMyInfo().then((response) => {
+	  await getMyInfo().then((response) => {
 	    let userState = response.data.data.profile;
 	    this.avatarUrl = userState.avatarUrl;
 	    this.nickName = userState.nickname;
@@ -162,7 +162,7 @@ export default {
 	  
 	  
     // 歌单数量
-    getPlaylistCount().then((response) => {
+    await getPlaylistCount().then((response) => {
       let playLists = response.data;
       // 创建歌单数量
       this.createdPlaylistCount =
@@ -173,7 +173,7 @@ export default {
     });
     if (this.userId) {
       // 获取用户歌单
-      getPlayLists(this.userId).then((response) => {
+      await getPlayLists(this.userId).then((response) => {
         let playlist = response.data.playlist;
         // 将列表循环出来
         for (let index = 0; index < playlist.length; index++) {
