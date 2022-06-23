@@ -1,8 +1,8 @@
 <template>
-	<view class="">
+	<view class="content">
 		<zaudio theme="theme3" v-if="playSong"></zaudio>
 		<!-- 我喜欢的音乐卡片 -->
-		<uni-section type="line" v-else>
+		<uni-section type="line" >
 			<uni-card title="我喜欢的音乐">
 				<view class="myEnjoyBox" v-for="(item,index) in songs" :key="item.id" @click="getListSongUrl(item)">
 					<p>{{index+1}}</p>
@@ -11,12 +11,16 @@
 				</view>
 			</uni-card>
 		</uni-section>
-
+<!-- 播放器样式 -->
+	<view class="player">
+		<zaudio autoPlay></zaudio>
+	</view>
 	</view>
 </template>
 
 <script>
 	import zaudio from "@/components/uniapp-zaudio/zaudio.vue";
+	
 	// 引入axios请求
 	import {
 		getSongUrl
@@ -65,7 +69,7 @@
 				
 				this.$zaudio.setAudio(this.song); //添加音频
 				this.$zaudio.setRender(this.song.length - 1); //渲染第一首音频
-				this.playSong = true
+				// this.playSong = true
 				console.log(this.$zaudio.audiolist,'当前的音频列表数据'); //获取当前的音频列表数据
 						
 			},
@@ -116,5 +120,14 @@
 			border-radius: 60rpx;
 			margin-left: 10rpx;
 		}
+	}
+	.player{
+		width: 100%;
+		height: 100px;
+		position:fixed;
+		bottom:0;
+	}
+	.content{
+		padding-bottom: 100px;
 	}
 </style>

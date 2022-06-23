@@ -162,7 +162,7 @@
 					sex: this.sex
 				}
 				console.log(this.account)
-				getLoginInfo1(data).then((response) => {
+				getLoginInfo(data).then((response) => {
 					console.log('response',response)
 					// 将 data 存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个同步接口。
 					uni.setStorageSync('token', response.data.token);

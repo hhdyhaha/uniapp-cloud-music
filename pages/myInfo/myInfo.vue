@@ -9,7 +9,7 @@
     <!-- </view> -->
     <!-- 我的页面 -->
 
-    <view>
+    <view class="content">
       <view class="header">
         <!-- 头像 -->
         <view class="avatar">
@@ -102,14 +102,18 @@
         </uni-card>
       </uni-section>
     </view>
+  <!-- 播放器样式 -->
+	<view class="player">
+		<zaudio autoPlay></zaudio>
+	</view>
   </view>
-
+	
 </template>
 
 <script>
 // 引入登录页面
 import CommonLogin from "@/components/commonLogin/commonLogin.vue";
-// 引入axios请求
+import Zaudio from "@/components/uniapp-zaudio/zaudio" 
 import {
   getMyInfo,
   getPlaylistCount,
@@ -147,6 +151,7 @@ export default {
   components: {
     // 登录页面
     CommonLogin,
+    Zaudio
   },
   // 监听页面显示。页面每次出现在屏幕上都触发，包括从下级页面点返回露出当前页面
   async onLoad() {
@@ -283,5 +288,14 @@ export default {
     margin-top: 20rpx;
     border-radius: 60rpx;
   }
+}
+.player{
+	width: 100%;
+	height: 100px;
+	position:fixed;
+	bottom:0;
+}
+.content{
+	padding-bottom: 100px;
 }
 </style>
